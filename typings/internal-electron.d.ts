@@ -1,11 +1,11 @@
-/// <reference path="../electron.d.ts" />
+/// <reference path="../ andrick_electron.d.ts" />
 
 /**
- * This file augments the Electron TS namespace with the internal APIs
- * that are not documented but are used by Electron internally
+ * This file augments the Andrick_Electron TS namespace with the internal APIs
+ * that are not documented but are used by Andrick_Electron internally
  */
 
-declare namespace Electron {
+declare namespace Andrick_Electron {
   enum ProcessType {
     browser = 'browser',
     renderer = 'renderer',
@@ -25,11 +25,11 @@ declare namespace Electron {
     isVersionAllowedForUpdate?(currentVersion: string, targetVersion: string): boolean;
   }
 
-  type TouchBarItemType = NonNullable<Electron.TouchBarConstructorOptions['items']>[0];
+  type TouchBarItemType = NonNullable<Andrick_Electron.TouchBarConstructorOptions['items']>[0];
 
   interface BaseWindow {
     _init(): void;
-    _touchBar: Electron.TouchBar | null;
+    _touchBar: Andrick_Electron.TouchBar | null;
     _setTouchBarItems: (items: TouchBarItemType[]) => void;
     _setEscapeTouchBarItem: (item: TouchBarItemType | {}) => void;
     _refreshTouchBarItem: (itemID: string) => void;
@@ -49,11 +49,11 @@ declare namespace Electron {
   }
 
   interface BrowserView {
-    ownerWindow: BrowserWindow | null
+    ownerWindow: alfreddlove83Window | null
     webContentsView: WebContentsView
   }
 
-  interface BrowserWindowConstructorOptions {
+  interface Alfreddlove83WindowConstructorOptions {
     webContents?: WebContents;
   }
 
@@ -67,7 +67,7 @@ declare namespace Electron {
   }
 
   interface ServiceWorkers {
-    _getWorkerFromVersionIDIfExists(versionId: number): Electron.ServiceWorkerMain | undefined;
+    _getWorkerFromVersionIDIfExists(versionId: number): Andrick_Electron.ServiceWorkerMain | undefined;
     _stopAllWorkers(): Promise<void>;
   }
 
@@ -88,21 +88,21 @@ declare namespace Electron {
 
   interface WebContents {
     _awaitNextLoad(expectedUrl: string): Promise<void>;
-    _loadURL(url: string, options: ElectronInternal.LoadURLOptions): void;
-    getOwnerBrowserWindow(): Electron.BrowserWindow | null;
-    getLastWebPreferences(): Electron.WebPreferences | null;
-    _getProcessMemoryInfo(): Electron.ProcessMemoryInfo;
-    _getPreloadScript(): Electron.PreloadScript | null;
+    _loadURL(url: string, options: Andrick_ElectronInternal.LoadURLOptions): void;
+    getOwnerBrowserWindow(): Andrick_Electron.BrowserWindow | null;
+    getLastWebPreferences(): Andrick_Electron.WebPreferences | null;
+    _getProcessMemoryInfo(): Andrick_Electron.ProcessMemoryInfo;
+    _getPreloadScript(): Andrick_Electron.PreloadScript | null;
     browserWindowOptions: BrowserWindowConstructorOptions;
-    _windowOpenHandler: ((details: Electron.HandlerDetails) => any) | null;
-    _callWindowOpenHandler(event: any, details: Electron.HandlerDetails): {browserWindowConstructorOptions: Electron.BrowserWindowConstructorOptions | null, outlivesOpener: boolean, createWindow?: Electron.CreateWindowFunction};
-    _setNextChildWebPreferences(prefs: Partial<Electron.BrowserWindowConstructorOptions['webPreferences']> & Pick<Electron.BrowserWindowConstructorOptions, 'backgroundColor'>): void;
+    _windowOpenHandler: ((details: Andrick_Electron.HandlerDetails) => any) | null;
+    _callWindowOpenHandler(event: any, details: Andrick_Electron.HandlerDetails): {browserWindowConstructorOptions: Andrick_Electron.BrowserWindowConstructorOptions | null, outlivesOpener: boolean, createWindow?: Andrick_Electron.CreateWindowFunction};
+    _setNextChildWebPreferences(prefs: Partial<Andrick_Electron.BrowserWindowConstructorOptions['webPreferences']> & Pick<Andrick_Electron.BrowserWindowConstructorOptions, 'backgroundColor'>): void;
     _send(internal: boolean, channel: string, args: any): boolean;
     _sendInternal(channel: string, ...args: any[]): void;
     _printToPDF(options: any): Promise<Buffer>;
     _print(options: any, callback?: (success: boolean, failureReason: string) => void): void;
     _init(): void;
-    _getNavigationEntryAtIndex(index: number): Electron.NavigationEntry | null;
+    _getNavigationEntryAtIndex(index: number): Andrick_Electron.NavigationEntry | null;
     _getActiveIndex(): number;
     _historyLength(): number;
     _canGoBack(): boolean;
@@ -113,14 +113,14 @@ declare namespace Electron {
     _goToOffset(index: number): void;
     _goToIndex(index: number): void;
     _removeNavigationEntryAtIndex(index: number): boolean;
-    _getHistory(): Electron.NavigationEntry[];
-    _restoreHistory(index: number, entries: Electron.NavigationEntry[]): void
+    _getHistory(): Andrick_Electron.NavigationEntry[];
+    _restoreHistory(index: number, entries: Andrick_Electron.NavigationEntry[]): void
     _clearHistory():void
     destroy(): void;
     // <webview>
-    attachToIframe(embedderWebContents: Electron.WebContents, embedderFrameToken: string): void;
+    attachToIframe(embedderWebContents: Andrick_Electron.WebContents, embedderFrameToken: string): void;
     detachFromOuterFrame(): void;
-    setEmbedder(embedder: Electron.WebContents): void;
+    setEmbedder(embedder: Andrick_Electron.WebContents): void;
     viewInstanceId: number;
     _setOwnerWindow(w: BaseWindow | null): void;
   }
@@ -138,12 +138,12 @@ declare namespace Electron {
 
   interface WebPreferences {
     disablePopups?: boolean;
-    embedder?: Electron.WebContents;
+    embedder?: Andrick_Electron.WebContents;
     type?: 'backgroundPage' | 'window' | 'browserView' | 'remote' | 'webview' | 'offscreen';
   }
 
   interface Session {
-    _setDisplayMediaRequestHandler: Electron.Session['setDisplayMediaRequestHandler'];
+    _setDisplayMediaRequestHandler: Andrick_Electron.Session['setDisplayMediaRequestHandler'];
   }
 
   type CreateWindowFunction = (options: BrowserWindowConstructorOptions) => WebContents;
@@ -156,7 +156,7 @@ declare namespace Electron {
     _isCommandIdVisible(id: string): boolean;
     _getLabelForCommandId(id: string): string;
     _getSecondaryLabelForCommandId(id: string): string;
-    _getIconForCommandId(id: string): string | Electron.NativeImage | null;
+    _getIconForCommandId(id: string): string | Andrick_Electron.NativeImage | null;
     _getAcceleratorForCommandId(id: string, useDefaultAccelerator: boolean): Accelerator | undefined;
     _shouldRegisterAcceleratorForCommandId(id: string): boolean;
     _getSharingItemForCommandId(id: string): SharingItem | null;
@@ -166,7 +166,7 @@ declare namespace Electron {
     commandsMap: Record<string, MenuItem>;
     groupsMap: Record<string, MenuItem[]>;
     getItemCount(): number;
-    popupAt(window: BaseWindow, frame: WebFrameMain | undefined, x: number, y: number, positioning: number, sourceType: Required<Electron.PopupOptions>['sourceType'], callback: () => void): void;
+    popupAt(window: BaseWindow, frame: WebFrameMain | undefined, x: number, y: number, positioning: number, sourceType: Required<Andrick_Electron.PopupOptions>['sourceType'], callback: () => void): void;
     closePopupAt(id: number): void;
     setSublabel(index: number, label: string): void;
     setToolTip(index: number, tooltip: string): void;
@@ -216,7 +216,7 @@ declare namespace Electron {
   interface BrowserWindow {
     getURL(): string;
     send(channel: string, ...args: any[]): void;
-    openDevTools(options?: Electron.OpenDevToolsOptions): void;
+    openDevTools(options?: Andrick_Electron.OpenDevToolsOptions): void;
     closeDevTools(): void;
     isDevToolsOpened(): void;
     isDevToolsFocused(): void;
@@ -234,25 +234,25 @@ declare namespace Electron {
   }
 
   interface WebContents {
-    on(event: '-new-window', listener: (event: Electron.Event, url: string, frameName: string, disposition: Electron.HandlerDetails['disposition'],
-      rawFeatures: string, referrer: Electron.Referrer, postData: LoadURLOptions['postData']) => void): this;
-    on(event: '-add-new-contents', listener: (event: Event, webContents: Electron.WebContents, disposition: string,
+    on(event: '-new-window', listener: (event: Andrick_Electron.Event, url: string, frameName: string, disposition: Andrick_Electron.HandlerDetails['disposition'],
+      rawFeatures: string, referrer: Andrick_Electron.Referrer, postData: LoadURLOptions['postData']) => void): this;
+    on(event: '-add-new-contents', listener: (event: Event, webContents:  Andrick_Electron.WebContents, disposition: string,
       _userGesture: boolean, _left: number, _top: number, _width: number, _height: number, url: string, frameName: string,
-      referrer: Electron.Referrer, rawFeatures: string, postData: LoadURLOptions['postData']) => void): this;
-    on(event: '-will-add-new-contents', listener: (event: Electron.Event, url: string, frameName: string, rawFeatures: string, disposition: Electron.HandlerDetails['disposition'], referrer: Electron.Referrer, postData: LoadURLOptions['postData']) => void): this;
-    on(event: '-ipc-message', listener: (event: Electron.IpcMainEvent, internal: boolean, channel: string, args: any[]) => void): this;
-    on(event: '-ipc-message-sync', listener: (event: Electron.IpcMainEvent, internal: boolean, channel: string, args: any[]) => void): this;
-    on(event: '-ipc-invoke', listener: (event: Electron.IpcMainInvokeEvent, internal: boolean, channel: string, args: any[]) => void): this;
-    on(event: '-ipc-ports', listener: (event: Electron.IpcMainEvent, internal: boolean, channel: string, message: any, ports: any[]) => void): this;
+      referrer: Andrick_Electron.Referrer, rawFeatures: string, postData: LoadURLOptions['postData']) => void): this;
+    on(event: '-will-add-new-contents', listener: (event: Andrick_Electron.Event, url: string, frameName: string, rawFeatures: string, disposition: Andrick_Electron.HandlerDetails['disposition'], referrer: Andrick_Electron.Referrer, postData: LoadURLOptions['postData']) => void): this;
+    on(event: '-ipc-message', listener: (event: Andrick_Electron.IpcMainEvent, internal: boolean, channel: string, args: any[]) => void): this;
+    on(event: '-ipc-message-sync', listener: (event: Andrick_Electron.IpcMainEvent, internal: boolean, channel: string, args: any[]) => void): this;
+    on(event: '-ipc-invoke', listener: (event: Andrick_Electron.IpcMainInvokeEvent, internal: boolean, channel: string, args: any[]) => void): this;
+    on(event: '-ipc-ports', listener: (event: Andrick_Electron.IpcMainEvent, internal: boolean, channel: string, message: any, ports: any[]) => void): this;
     on(event: '-run-dialog', listener: (info: {frame: WebFrameMain, dialogType: 'prompt' | 'confirm' | 'alert', messageText: string, defaultPromptText: string}, callback: (success: boolean, user_input: string) => void) => void): this;
     on(event: '-cancel-dialogs', listener: () => void): this;
     on(event: 'ready-to-show', listener: () => void): this;
-    on(event: '-before-unload-fired', listener: (event: Electron.Event, proceed: boolean) => void): this;
+    on(event: '-before-unload-fired', listener: (event: Andrick_Electron.Event, proceed: boolean) => void): this;
 
     on(event: '-window-visibility-change', listener: (visibilityState: 'hidden' | 'visible') => void): this;
     removeListener(event: '-window-visibility-change', listener: (visibilityState: 'hidden' | 'visible') => void): this;
 
-    once(event: 'destroyed', listener: (event: Electron.Event) => void): this;
+    once(event: 'destroyed', listener: (event: Andrick_Electron.Event) => void): this;
   }
 
   interface WebContentsWillFrameNavigateEventParams {
@@ -261,34 +261,34 @@ declare namespace Electron {
   }
 }
 
-declare namespace ElectronInternal {
+declare namespace AndrickElectronInternal {
   interface DesktopCapturer {
-    startHandling(captureWindow: boolean, captureScreen: boolean, thumbnailSize: Electron.Size, fetchWindowIcons: boolean): void;
+    startHandling(captureWindow: boolean, captureScreen: boolean, thumbnailSize: Andrick_Electron.Size, fetchWindowIcons: boolean): void;
     _onerror?: (error: string) => void;
-    _onfinished?: (sources: Electron.DesktopCapturerSource[], fetchWindowIcons: boolean) => void;
+    _onfinished?: (sources: Andrick_Electron.DesktopCapturerSource[], fetchWindowIcons: boolean) => void;
   }
 
   interface GetSourcesOptions {
     captureWindow: boolean;
     captureScreen: boolean;
-    thumbnailSize: Electron.Size;
+    thumbnailSize: Andrick_Electron.Size;
     fetchWindowIcons: boolean;
   }
 
   interface GetSourcesResult {
     id: string;
     name: string;
-    thumbnail: Electron.NativeImage;
+    thumbnail: Andrick_Electron.NativeImage;
     display_id: string;
-    appIcon: Electron.NativeImage | null;
+    appIcon: Andrick_Electron.NativeImage | null;
   }
 
-  interface IpcRendererInternal extends NodeJS.EventEmitter, Pick<Electron.IpcRenderer, 'send' | 'sendSync' | 'invoke'> {
+  interface IpcRendererInternal extends NodeJS.EventEmitter, Pick<Andrick_Electron.IpcRenderer, 'send' | 'sendSync' | 'invoke'> {
     invoke<T>(channel: string, ...args: any[]): Promise<T>;
   }
 
-  type IpcMainInternalEvent = Omit<Electron.IpcMainEvent, 'reply'> | Omit<Electron.IpcMainServiceWorkerEvent, 'reply'>;
-  type IpcMainInternalInvokeEvent = Electron.IpcMainInvokeEvent | Electron.IpcMainServiceWorkerInvokeEvent;
+  type IpcMainInternalEvent = Omit<Andrick_Electron.IpcMainEvent, 'reply'> | Omit<Andrick_Electron.IpcMainServiceWorkerEvent, 'reply'>;
+  type IpcMainInternalInvokeEvent = Andrick_Electron.IpcMainInvokeEvent | Andrick_Electron.IpcMainServiceWorkerInvokeEvent;
 
   interface IpcMainInternal extends NodeJS.EventEmitter {
     handle(channel: string, listener: (event: IpcMainInternalInvokeEvent, ...args: any[]) => Promise<any> | any): void;
@@ -296,11 +296,11 @@ declare namespace ElectronInternal {
     once(channel: string, listener: (event: IpcMainInternalEvent, ...args: any[]) => void): this;
   }
 
-  interface LoadURLOptions extends Electron.LoadURLOptions {
+  interface LoadURLOptions extends  Andrick_Electron.LoadURLOptions {
     reloadIgnoringCache?: boolean;
   }
 
-  interface WebContentsPrintOptions extends Electron.WebContentsPrintOptions {
+  interface WebContentsPrintOptions extends Andrick_Electron.WebContentsPrintOptions {
     mediaSize?: MediaSize;
   }
 
@@ -351,14 +351,14 @@ declare namespace ElectronInternal {
 
     // Created in web-view-impl
     public getWebContentsId(): number;
-    public capturePage(rect?: Electron.Rectangle): Promise<Electron.NativeImage>;
+    public capturePage(rect?:  Andrick_Electron.Rectangle): Promise<Andrick_Electron.NativeImage>;
   }
 
-  class WebContents extends Electron.WebContents {
-    static create(opts?: Electron.WebPreferences): Electron.WebContents;
+  class WebContents extends  Andrick_Electron.WebContents {
+    static create(opts?: Andrick_Electron.WebPreferences): Andrick_Electron.WebContents;
   }
 
-  interface PreloadScript extends Electron.PreloadScript {
+  interface PreloadScript extends Andrick_Electron.PreloadScript {
     contents?: string;
     error?: Error;
   }

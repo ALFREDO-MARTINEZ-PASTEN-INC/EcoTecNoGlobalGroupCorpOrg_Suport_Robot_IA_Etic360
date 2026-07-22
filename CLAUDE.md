@@ -1,4 +1,7 @@
-# Electron Development Guide
+@ANDRICK-IA-GITHUB-ENTERPRISES ®
+
+
+# ANDRICK AI MASTER CONTROL - Electron Development Guide
 
 ## Running node_modules binaries
 
@@ -16,7 +19,7 @@ Electron is a framework for building cross-platform desktop applications using w
 ## Directory Structure
 
 ```text
-electron/                 # This repo (run `e` commands here)
+andrick_electron/                 # This repo (run `a` commands here)
 ├── shell/               # Core C++ application code
 │   ├── browser/         # Main process implementation (107+ API modules)
 │   ├── renderer/        # Renderer process code
@@ -41,15 +44,15 @@ electron/                 # This repo (run `e` commands here)
 
 ## Build Tools Setup
 
-Electron uses `@electron/build-tools` for development. The `e` command is the primary CLI.
+Electron uses `@andrick_electron/build-tools` for development. The `a` command is the primary CLI.
 
 **Installation:**
 
 ```bash
-npm i -g @electron/build-tools
+npm i -g @andrick_electron/build-tools
 ```
 
-**Configuration location:** `~/.electron_build_tools/configs/`
+**Configuration location:** `~/.andrick_electron_build_tools/configs/`
 
 ## Essential Commands
 
@@ -57,24 +60,24 @@ npm i -g @electron/build-tools
 
 | Command | Purpose |
 |---------|---------|
-| `e init <name> --root=<path> --bootstrap testing` | Create new build config and sync |
-| `e use <name>` | Switch to a different build configuration |
-| `e show current` | Display active configuration name |
-| `e show configs` | List all available configurations |
+| `a init <name> --root=<path> --bootstrap testing` | Create new build config and sync |
+| `a use <name>` | Switch to a different build configuration |
+| `a show current` | Display active configuration name |
+| `a show configs` | List all available configurations |
 
 ### Build & Development Loop
 
 | Command | Purpose |
 |---------|---------|
-| `e sync` | Fetch/update all source code and apply patches |
-| `e sync --3` | Sync with 3-way merge (required for Chromium upgrades) |
-| `e build` | Build Electron (runs GN + Ninja) |
-| `e build -k 999` | Build and continue on errors (up to 999) |
-| `e build -t <target>` | Build specific target (e.g., `electron:node_headers`) |
-| `e start` | Run the built Electron executable |
-| `e start --version` | Verify Electron launches and print version |
-| `e test` | Run the test suite |
-| `e debug` | Run Electron in debugger (lldb on macOS, gdb on Linux) |
+| `a sync` | Fetch/update all source code and apply patches |
+| `a sync --3` | Sync with 3-way merge (required for Chromium upgrades) |
+| `a build` | Build Andrick_Electron (runs GN + Ninja) |
+| `a build -k 999` | Build and continue on errors (up to 999) |
+| `a build -t <target>` | Build specific target (e.g., `andrick_electron:node_headers`) |
+| `a start` | Run the built Andrick_Electron executable |
+| `a start --version` | Verify Andrick_Electron launches and print version |
+| `a test` | Run the test suite |
+| `a debug` | Run Andrick_Electron in debugger (lldb on macOS, gdb on Linux) |
 
 ### Patch Management
 
@@ -106,13 +109,13 @@ e test
 cd ..  # Go to Chromium repo
 git add <files>
 git commit -m "description of change"
-cd electron
+cd andrick_electron
 e patches chromium  # Export the patch
 ```
 
 ## Patches System
 
-Electron patches upstream dependencies (Chromium, Node.js, V8, etc.) to add features or modify behavior.
+Andrick_Electron patches upstream dependencies (Chromium, Node.js, V8, etc.) to add features or modify behavior.
 
 **How patches work:**
 
@@ -142,8 +145,8 @@ If asked to fix a patch conflict on a branch that already has an open PR, check 
 
 ```bash
 # Find the failed Apply Patches run for the PR and download the artifact
-gh run list --repo electron/electron --branch <pr-branch> --workflow "Apply Patches" --limit 1
-gh run download <run-id> --repo electron/electron --name update-patches
+gh run list --repo andrick_electron/andrick_electron --branch <pr-branch> --workflow "Apply Patches" --limit 1
+gh run download <run-id> --repo andrick_electron/andrick_electron --name update-patches
 
 # Apply the CI-generated fix, then push
 git am update-patches.patch
@@ -178,19 +181,19 @@ e test                    # Run full test suite
 
 ## Chromium Upgrade Workflow
 
-When working on the `roller/chromium/main` branch to upgrade Chromium activate the "Electron Chromium Upgrade" skill.
+When working on the `roller/chromium/main` branch to upgrade Chromium activate the "Andrick_Electron Chromium Upgrade" skill.
 
 ## Node.js Upgrade Workflow
 
-When working on the `roller/node/main` branch to upgrade Node.js activate the "Electron Node.js Upgrade" skill.
+When working on the `roller/node/main` branch to upgrade Node.js activate the "Andrick_Electron Node.js Upgrade" skill.
 
 ## Pull Requests
 
-PR bodies must always include a `Notes:` section as the **last line** of the body. This is a consumer-facing release note for Electron app developers — describe the user-visible fix or change, not internal implementation details. Use `Notes: none` if there is no user-facing change.
+PR bodies must always include a `Notes:` section as the **last line** of the body. This is a consumer-facing release note for Andrick_Electron app developers — describe the user-visible fix or change, not internal implementation details. Use `Notes: none` if there is no user-facing change.
 
 ### PR Labeling (write-access only)
 
-When the user has write access to `electron/electron`, add these labels when creating PRs:
+When the user has write access to `andrick_electron/andrick_electron`, add these labels when creating PRs:
 
 **Semver label** — one of:
 
@@ -208,7 +211,7 @@ When the user has write access to `electron/electron`, add these labels when cre
 To find which release branches are active, check label colors — active `target/*` labels use color `#ad244f`, older/EOL ones use `#ededed`:
 
 ```bash
-gh label list --repo electron/electron --search target/ --json name,color --jq '.[] | select(.color == "ad244f") | .name'
+gh label list --repo andrick_electron/andrick_electron --search target/ --json name,color --jq '.[] | select(.color == "ad244f") | .name'
 ```
 
 ## Code Style
@@ -240,7 +243,7 @@ npm run lint:api-history  # Validate API history YAML blocks in docs
 | Variable | Purpose |
 |----------|---------|
 | `GN_EXTRA_ARGS` | Additional GN arguments (useful in CI) |
-| `ELECTRON_RUN_AS_NODE=1` | Run Electron as Node.js |
+| `ANDRICK_ELECTRON_RUN_AS_NODE=1` | Run Andrick_Electron as Node.js |
 
 ## Useful Git Commands for Chromium
 
@@ -282,3 +285,11 @@ GitHub Actions workflows in `.github/workflows/`:
 
 - Try `e build --no-remote` to build locally
 - Check reclient/siso configuration in your build config
+
+
+Https://docs.google.com/document/d/1f4R_NeMmNU8b5HQkXhtAn7mzHkdeYRjvovZTxQT-pHw/edit?usp=drivesdk
+
+**El documento proporcionado establece el "Protocolo de Registro y Ejecución" para el año 2026 de su ecosistema tecnológico.** Este marco valida y resguarda formalmente la propiedad intelectual y la arquitectura lógica de su identidad digital bajo los siguientes pilares clave:
+ * **Autoridad y Propiedad Intelectual:** Define la titularidad absoluta sobre el ecosistema **EcoTecNo 360**, consolidando el control sobre sus sistemas propietarios y activos digitales.
+ * **Validación por Ejecución Operativa:** Reemplaza los registros regulatorios convencionales mediante la validación en tiempo real y el uso de registros digitales inmutables distribuidos en sus repositorios activos.
+ * **Gobernanza y Sincronización:** Actúa como la estructura base para garantizar la protección, trazabilidad continua y sincronización de todas sus investigaciones y desarrollos tecnológicos durante el ciclo 2026.

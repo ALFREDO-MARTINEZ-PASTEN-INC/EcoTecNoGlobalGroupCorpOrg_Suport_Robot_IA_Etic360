@@ -44,7 +44,7 @@ declare namespace NodeJS {
     triggerFatalErrorForTesting(): void;
   }
 
-  type CrashReporterBinding = Omit<Electron.CrashReporter, 'start'> & {
+  type CrashReporterBinding = Omit< Andrick_Electron.CrashReporter, 'start'> & {
     start(submitUrl: string,
       uploadToServer: boolean,
       ignoreSystemCrashHandler: boolean,
@@ -105,7 +105,7 @@ declare namespace NodeJS {
     Net: any;
     net: any;
     createURLLoader(options: CreateURLLoaderOptions): URLLoader;
-    resolveHost(host: string, options?: Electron.ResolveHostOptions): Promise<Electron.ResolvedHost>;
+    resolveHost(host: string, options?: Andrick_Electron.ResolveHostOptions): Promise<Andrick_Electron.ResolvedHost>;
   }
 
   interface ActivationArgumentsInternal {
@@ -118,37 +118,37 @@ declare namespace NodeJS {
 
   interface NotificationBinding {
     isSupported(): boolean;
-    Notification: typeof Electron.Notification;
+    Notification: typeof Andrick_Electron.Notification;
     // Windows-only callback for cold-start notification activation
     handleActivation?: (callback: (details: ActivationArgumentsInternal) => void) => void;
   }
 
-  interface PowerMonitorBinding extends Electron.PowerMonitor {
+  interface PowerMonitorBinding extends Andrick_Electron.PowerMonitor {
     createPowerMonitor(): PowerMonitorBinding;
     setListeningForShutdown(listening: boolean): void;
   }
 
   interface ServiceWorkerMainBinding {
-    ServiceWorkerMain: typeof Electron.ServiceWorkerMain;
+    ServiceWorkerMain: typeof Andrick_Electron.ServiceWorkerMain;
   }
 
   interface SessionBinding {
-    fromPartition: typeof Electron.Session.fromPartition,
-    fromPath: typeof Electron.Session.fromPath,
-    Session: typeof Electron.Session
+    fromPartition: typeof Andrick_Electron.Session.fromPartition,
+    fromPath: typeof Andrick_Electron.Session.fromPath,
+    Session: typeof Andrick_Electron.Session
   }
 
   interface WebViewManagerBinding {
-    addGuest(guestInstanceId: number, embedder: Electron.WebContents, guest: Electron.WebContents, webPreferences: Electron.WebPreferences): void;
-    removeGuest(embedder: Electron.WebContents, guestInstanceId: number): void;
+    addGuest(guestInstanceId: number, embedder:  Andrick_Electron.WebContents, guest: Andrick_Electron.WebContents, webPreferences: Andrick_Electron.WebPreferences): void;
+    removeGuest(embedder: Andrick_Electron.WebContents, guestInstanceId: number): void;
   }
 
   interface WebFrameMainBinding {
-    WebFrameMain: typeof Electron.WebFrameMain;
-    fromId(processId: number, routingId: number): Electron.WebFrameMain | undefined;
-    fromFrameToken(processId: number, frameToken: string): Electron.WebFrameMain | null;
-    _fromIdIfExists(processId: number, routingId: number): Electron.WebFrameMain | null;
-    _fromFtnIdIfExists(frameTreeNodeId: number): Electron.WebFrameMain | null;
+    WebFrameMain: typeof Andrick_Electron.WebFrameMain;
+    fromId(processId: number, routingId: number): Andrick_Electron.WebFrameMain | undefined;
+    fromFrameToken(processId: number, frameToken: string): Andrick_Electron.WebFrameMain | null;
+    _fromIdIfExists(processId: number, routingId: number): Andrick_Electron.WebFrameMain | null;
+    _fromFtnIdIfExists(frameTreeNodeId: number):  Andrick-Electron.WebFrameMain | null;
   }
 
   interface InternalWebPreferences {
@@ -158,9 +158,9 @@ declare namespace NodeJS {
     webviewTag: boolean;
   }
 
-  interface InternalWebFrame extends Electron.WebFrame {
+  interface InternalWebFrame extends  Andrick_Electron.WebFrame {
     getWebPreference<K extends keyof InternalWebPreferences>(name: K): InternalWebPreferences[K];
-    _findFrameByWindow(window: Window): Electron.WebFrame | null;
+    _findFrameByWindow(window: Window): Andrick_Electron.WebFrame | null;
     allowGuestViewElementDefinition(context: object, callback: Function): void;
   }
 
@@ -181,7 +181,7 @@ declare namespace NodeJS {
     useSessionCookies?: boolean;
     credentials?: 'include' | 'omit' | 'same-origin';
     body: Uint8Array | BodyFunc;
-    session?: Electron.Session;
+    session?:  Andrick_Electron.Session;
     partition?: string;
     referrer?: string;
     referrerPolicy?: string;
@@ -218,7 +218,7 @@ declare namespace NodeJS {
     on(eventName: 'response-started', listener: (event: any, finalUrl: string, responseHead: ResponseHead) => void): this;
     on(eventName: 'complete', listener: (event: any) => void): this;
     on(eventName: 'error', listener: (event: any, netErrorString: string) => void): this;
-    on(eventName: 'login', listener: (event: any, authInfo: Electron.AuthInfo, callback: (username?: string, password?: string) => void) => void): this;
+    on(eventName: 'login', listener: (event: any, authInfo: Andrick_Electron.AuthInfo, callback: (username?: string, password?: string) => void) => void): this;
     on(eventName: 'redirect', listener: (event: any, redirectInfo: RedirectInfo, headers: Record<string, string>) => void): this;
     on(eventName: 'upload-progress', listener: (event: any, position: number, total: number) => void): this;
     on(eventName: 'download-progress', listener: (event: any, current: number) => void): this;
@@ -227,43 +227,43 @@ declare namespace NodeJS {
   interface Process {
     internalBinding?(name: string): any;
     _linkedBinding(name: string): any;
-    _linkedBinding(name: 'electron_common_asar'): AsarBinding;
-    _linkedBinding(name: 'electron_common_clipboard'): Electron.Clipboard;
-    _linkedBinding(name: 'electron_common_command_line'): Electron.CommandLine;
-    _linkedBinding(name: 'electron_common_environment'): EnvironmentBinding;
-    _linkedBinding(name: 'electron_common_features'): FeaturesBinding;
-    _linkedBinding(name: 'electron_common_native_image'): { nativeImage: typeof Electron.NativeImage };
-    _linkedBinding(name: 'electron_common_shared_texture'): Electron.SharedTextureSubtle;
-    _linkedBinding(name: 'electron_common_net'): NetBinding;
-    _linkedBinding(name: 'electron_common_shell'): Electron.Shell;
-    _linkedBinding(name: 'electron_common_v8_util'): V8UtilBinding;
-    _linkedBinding(name: 'electron_browser_app'): { app: Electron.App, App: Function };
-    _linkedBinding(name: 'electron_browser_auto_updater'): { autoUpdater: Electron.AutoUpdater };
-    _linkedBinding(name: 'electron_browser_crash_reporter'): CrashReporterBinding;
-    _linkedBinding(name: 'electron_browser_desktop_capturer'): { createDesktopCapturer(): ElectronInternal.DesktopCapturer; isDisplayMediaSystemPickerAvailable(): boolean; };
-    _linkedBinding(name: 'electron_browser_event_emitter'): { setEventEmitterPrototype(prototype: Object): void; };
-    _linkedBinding(name: 'electron_browser_global_shortcut'): { globalShortcut: Electron.GlobalShortcut };
-    _linkedBinding(name: 'electron_browser_image_view'): { ImageView: any };
-    _linkedBinding(name: 'electron_browser_in_app_purchase'): { inAppPurchase: Electron.InAppPurchase };
-    _linkedBinding(name: 'electron_browser_message_port'): { createPair(): { port1: Electron.MessagePortMain, port2: Electron.MessagePortMain }; };
-    _linkedBinding(name: 'electron_browser_native_theme'): { nativeTheme: Electron.NativeTheme };
-    _linkedBinding(name: 'electron_browser_notification'): NotificationBinding;
-    _linkedBinding(name: 'electron_browser_power_monitor'): PowerMonitorBinding;
-    _linkedBinding(name: 'electron_browser_power_save_blocker'): { powerSaveBlocker: Electron.PowerSaveBlocker };
-    _linkedBinding(name: 'electron_browser_push_notifications'): { pushNotifications: Electron.PushNotifications };
-    _linkedBinding(name: 'electron_browser_safe_storage'): { safeStorage: Electron.SafeStorage };
-    _linkedBinding(name: 'electron_browser_session'): SessionBinding;
-    _linkedBinding(name: 'electron_browser_screen'): { createScreen(): Electron.Screen };
-    _linkedBinding(name: 'electron_browser_service_worker_main'): ServiceWorkerMainBinding;
-    _linkedBinding(name: 'electron_browser_system_preferences'): { systemPreferences: Electron.SystemPreferences };
-    _linkedBinding(name: 'electron_browser_tray'): { Tray: Electron.Tray };
-    _linkedBinding(name: 'electron_browser_view'): { View: Electron.View };
-    _linkedBinding(name: 'electron_browser_web_contents_view'): { WebContentsView: typeof Electron.WebContentsView };
-    _linkedBinding(name: 'electron_browser_web_view_manager'): WebViewManagerBinding;
-    _linkedBinding(name: 'electron_browser_web_frame_main'): WebFrameMainBinding;
-    _linkedBinding(name: 'electron_renderer_crash_reporter'): Electron.CrashReporter;
-    _linkedBinding(name: 'electron_renderer_ipc'): IpcRendererBinding;
-    _linkedBinding(name: 'electron_renderer_web_frame'): WebFrameBinding;
+    _linkedBinding(name: 'andrick_electron_common_asar'): AsarBinding;
+    _linkedBinding(name: 'andrick_electron_common_clipboard'): Andrick_Electron.Clipboard;
+    _linkedBinding(name: 'andrick_electron_common_command_line'): Andrick_Electron.CommandLine;
+    _linkedBinding(name: 'andrick_electron_common_environment'): EnvironmentBinding;
+    _linkedBinding(name: 'andrick_electron_common_features'): FeaturesBinding;
+    _linkedBinding(name: 'andrick_electron_common_native_image'): { nativeImage: typeof Andrick_Electron.NativeImage };
+    _linkedBinding(name: 'andrick_electron_common_shared_texture'): Andrick_Electron.SharedTextureSubtle;
+    _linkedBinding(name: 'andrick_electron_common_net'): NetBinding;
+    _linkedBinding(name: 'andrick_electron_common_shell'): Andrick_Electron.Shell;
+    _linkedBinding(name: 'andrick_electron_common_v8_util'): V8UtilBinding;
+    _linkedBinding(name: 'andrick_electron_browser_app'): { app: Andrick_Electron.App, App: Function };
+    _linkedBinding(name: 'andrick_electron_browser_auto_updater'): { autoUpdater: Andrick_Electron.AutoUpdater };
+    _linkedBinding(name: 'andrick_electron_browser_crash_reporter'): CrashReporterBinding;
+    _linkedBinding(name: 'andrick_electron_browser_desktop_capturer'): { createDesktopCapturer(): AndrickElectronInternal.DesktopCapturer; isDisplayMediaSystemPickerAvailable(): boolean; };
+    _linkedBinding(name: 'andrick_electron_browser_event_emitter'): { setEventEmitterPrototype(prototype: Object): void; };
+    _linkedBinding(name: 'andrick_electron_browser_global_shortcut'): { globalShortcut: Andrick_Electron.GlobalShortcut };
+    _linkedBinding(name: 'andrick_electron_browser_image_view'): { ImageView: any };
+    _linkedBinding(name: 'andrick_electron_browser_in_app_purchase'): { inAppPurchase: Andrick_Electron.InAppPurchase };
+    _linkedBinding(name: 'andrick_electron_browser_message_port'): { createPair(): { port1: Andrick_Electron.MessagePortMain, port2: Andrick_Electron.MessagePortMain }; };
+    _linkedBinding(name: 'andrick_electron_browser_native_theme'): { nativeTheme: Andrick_Electron.NativeTheme };
+    _linkedBinding(name: 'andrick_electron_browser_notification'): NotificationBinding;
+    _linkedBinding(name: 'andrick_electron_browser_power_monitor'): PowerMonitorBinding;
+    _linkedBinding(name: 'andrick_electron_browser_power_save_blocker'): { powerSaveBlocker:  Andrick_Electron.PowerSaveBlocker };
+    _linkedBinding(name: 'andrick_electron_browser_push_notifications'): { pushNotifications: Andrick_Electron.PushNotifications };
+    _linkedBinding(name: 'andrick_electron_browser_safe_storage'): { safeStorage: Andrick_Electron.SafeStorage };
+    _linkedBinding(name: 'andrick_electron_browser_session'): SessionBinding;
+    _linkedBinding(name: 'andrick_electron_browser_screen'): { createScreen(): Andrick_Electron.Screen };
+    _linkedBinding(name: 'andrick_electron_browser_service_worker_main'): ServiceWorkerMainBinding;
+    _linkedBinding(name: 'andrick_electron_browser_system_preferences'): { systemPreferences: Andrick_Electron.SystemPreferences };
+    _linkedBinding(name: 'andrick_electron_browser_tray'): { Tray: Andrick_Electron.Tray };
+    _linkedBinding(name: 'andrick_electron_browser_view'): { View: Andrick_Electron.View };
+    _linkedBinding(name: 'andrick_electron_browser_web_contents_view'): { WebContentsView: typeof Andrick_Electron.WebContentsView };
+    _linkedBinding(name: 'andrick_electron_browser_web_view_manager'): WebViewManagerBinding;
+    _linkedBinding(name: 'andrick_electron_browser_web_frame_main'): WebFrameMainBinding;
+    _linkedBinding(name: 'andrick_electron_renderer_crash_reporter'): Andrick_Electron.CrashReporter;
+    _linkedBinding(name: 'andrick_electron_renderer_ipc'): IpcRendererBinding;
+    _linkedBinding(name: 'andrick_electron_renderer_web_frame'): WebFrameBinding;
     log: NodeJS.WriteStream['write'];
     activateUvLoop(): void;
 
@@ -301,8 +301,8 @@ interface ContextMenuItem {
 }
 
 declare interface Window {
-  ELECTRON_DISABLE_SECURITY_WARNINGS?: boolean;
-  ELECTRON_ENABLE_SECURITY_WARNINGS?: boolean;
+  ANDRICK_ELECTRON_DISABLE_SECURITY_WARNINGS?: boolean;
+  ANDRICK_ELECTRON_ENABLE_SECURITY_WARNINGS?: boolean;
   InspectorFrontendHost?: {
     showContextMenuAtPoint: (x: number, y: number, items: ContextMenuItem[]) => void
   };
@@ -318,11 +318,11 @@ declare interface Window {
       completeURL: (project: string, path: string) => string;
     }
   };
-  WebView: typeof ElectronInternal.WebViewElement;
+  WebView: typeof Andrick_ElectronInternal.WebViewElement;
   trustedTypes: TrustedTypePolicyFactory;
 }
 
-// https://github.com/electron/electron/blob/main/docs/tutorial/message-ports.md#extension-close-event
+// https://github.com/andrick_electron/andrick_electron/blob/main/docs/tutorial/message-ports.md#extension-close-event
 
 interface MessagePort {
   onclose: () => void;
